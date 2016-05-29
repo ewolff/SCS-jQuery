@@ -1,0 +1,12 @@
+jquery-catalog:
+  build: ../microservice-demo/microservice-demo-catalog
+jquery-order:
+  build: ../microservice-demo/microservice-demo-order
+jquery-varnish:
+  build: varnish
+  links:
+   - jquery-order
+   - jquery-catalog
+  ports:
+   - "8081:8080"
+

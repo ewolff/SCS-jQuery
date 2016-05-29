@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Layout</title>
+<link rel="stylesheet"
+	href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="/webjars/bootstrap/3.3.6/css/bootstrap-theme.min.css" />
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("a.embeddable").each(function(i, link) {
+			console.log("i "+i);
+			console.log("link "+link);
+			$("<div />").load(link.href, function(data, status, xhr) {
+				console.log("this "+this);
+				console.log("children "+this.children);
+				$(link).replaceWith(this);
+			});
+		});
+	});
+</script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<a class="brand" href="/"> Home</a> <a class="brand"
+					href="https://github.com/ultraq/thymeleaf-layout-dialect">
+					Thymeleaf - Layout </a>
+
+			</div>
+		</div>
+		<h1 layout:fragment="header">Layout</h1>
+		<div layout:fragment="content">Fake content</div>
+	</div>
+</body>
+</html>
