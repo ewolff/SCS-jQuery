@@ -13,11 +13,7 @@
 <script>
 	$(document).ready(function() {
 		$("a.embeddable").each(function(i, link) {
-			console.log("i "+i);
-			console.log("link "+link);
 			$("<div />").load(link.href, function(data, status, xhr) {
-				console.log("this "+this);
-				console.log("children "+this.children);
 				$(link).replaceWith(this);
 			});
 		});
