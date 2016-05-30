@@ -8,17 +8,6 @@
 	href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css" />
 <link rel="stylesheet"
 	href="/webjars/bootstrap/3.3.6/css/bootstrap-theme.min.css" />
-<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
-<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script>
-	$(document).ready(function() {
-		$("a.embeddable").each(function(i, link) {
-			$("<div />").load(link.href, function(data, status, xhr) {
-				$(link).replaceWith(this);
-			});
-		});
-	});
-</script>
 </head>
 
 <body>
@@ -34,5 +23,16 @@
 		<h1 layout:fragment="header">Layout</h1>
 		<div layout:fragment="content">Fake content</div>
 	</div>
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("a.embeddable").each(function(i, link) {
+			$("<div />").load(link.href, function(data, status, xhr) {
+				$(link).replaceWith(this);
+			});
+		});
+	});
+</script>
 </body>
 </html>
