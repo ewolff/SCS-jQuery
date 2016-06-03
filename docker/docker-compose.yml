@@ -1,12 +1,14 @@
-jquery-catalog:
-  build: ../scs-demo-jquery/scs-demo-catalog-jquery
-jquery-order:
-  build: ../scs-demo-jquery/scs-demo-order-jquery
-jquery-varnish:
-  build: varnish
-  links:
-   - jquery-order
-   - jquery-catalog
-  ports:
-   - "8081:8080"
+version: '2'
+services:
+  catalog:
+    build: ../scs-demo-jquery/scs-demo-catalog-jquery
+  order:
+    build: ../scs-demo-jquery/scs-demo-order-jquery
+  varnish:
+    build: varnish
+    links:
+     - order
+     - catalog
+    ports:
+     - "8081:8080"
 

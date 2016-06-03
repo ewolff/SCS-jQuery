@@ -7,12 +7,12 @@ vcl 4.0;
 
 # Default backend definition.
 backend default {
-    .host = "jquery-order";
+    .host = "order";
     .port = "8080";
 }
 
 backend catalog {
-        .host = "jquery-catalog";
+        .host = "catalog";
         .port = "8080";
 }
 
