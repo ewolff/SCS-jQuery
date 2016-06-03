@@ -20,7 +20,7 @@
 
 		<div class="row" th:each="orderLine : ${order.orderLine}">
 			<div class="col-md-2" th:text="${orderLine.count}">2</div>
-			<div class="col-md-2"><a th:href="'/catalog/'+${orderLine.itemId}+'.snippet'" class="embeddable" >item</a></div>
+			<div class="col-md-2"><a th:href="@{/catalog/{itemId}.snippet(itemId=${orderLine.itemId})}" class="embeddable" >item</a></div>
 		</div>
 	</div>
 </body>
