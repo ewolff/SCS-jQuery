@@ -2,7 +2,7 @@ SCS JQuery Sample
 ==============
 
 For [Self-contained Systems](http://scs-architecture.org) multiple
-frontends need to be integrated. This sample shows how to
+frontends need to be integrated. This sample shows how to do
 this. JavaScript Code on the frontend is used to load parts from other
 SCS. A hyperlink marked with class `embeddable`will be replaced with
 the content found at that URL.
