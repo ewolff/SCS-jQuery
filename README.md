@@ -1,4 +1,4 @@
-SCS JQuery Sample
+SCS jQuery Sample
 ==============
 
 For [Self-contained Systems](http://scs-architecture.org) multiple
