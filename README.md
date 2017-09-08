@@ -1,6 +1,8 @@
 SCS jQuery Sample
 ==============
 
+[Deutsche Anleitung zum Starten des Beispiels](WIE-LAUFEN.md)
+
 For [Self-contained Systems](http://scs-architecture.org) multiple
 frontends need to be integrated. This sample shows how to do
 this. JavaScript Code on the frontend is used to load parts from other
