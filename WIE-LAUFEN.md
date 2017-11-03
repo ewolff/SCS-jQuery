@@ -98,6 +98,9 @@ Successfully built 870158f27c4b
 Successfully tagged scsjquery_varnish:latest
 ```
 
+Wenn der Build nicht klappt, dann kann man mit  `docker-compose build
+--no-cache` die Container komplett neu bauen.
+
 Danach sollten die Docker Images erzeugt worden sein. Sie haben das
 Präfix `scsjquery`:
 

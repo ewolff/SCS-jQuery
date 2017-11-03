@@ -90,6 +90,9 @@ Successfully built 870158f27c4b
 Successfully tagged scsjquery_varnish:latest
 ```
 
+If the build fails, you can use  `docker-compose build --no-cache` to
+build them from scratch.
+
 Afterwards the Docker images should have been created. They have the prefix
 `scsjquery`:
 
