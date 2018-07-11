@@ -28,13 +28,13 @@ public class CatalogController {
 
 	@RequestMapping(value = "/{id}.html", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
 	public ModelAndView Item(@PathVariable("id") long id) {
-		return new ModelAndView("item", "item", itemRepository.findOne(id));
+		return new ModelAndView("item", "item", itemRepository.findById(id).get());
 	}
 
 	@RequestMapping(value = "/{id}.snippet", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
 	@ResponseBody
 	public String ItemESI(@PathVariable("id") long id) {
-		Item item = itemRepository.findOne(id);
+		Item item = itemRepository.findById(id).get();
 		return item.getName();
 	}
 
@@ -64,7 +64,7 @@ public class CatalogController {
 	@RequestMapping({ "/item-choice.snippet" })
 	public ModelAndView ItemChoice(@RequestParam(name = "selected", required = false) Long selected,
 			@RequestParam("name") String name, @RequestParam("id") String id) {
-		Map model = new HashMap<String, Object>();
+		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("items", itemRepository.findAll());
 		if (selected != null) {
 			model.put("selected", selected);
@@ -86,7 +86,7 @@ public class CatalogController {
 
 	@RequestMapping(value = "/{id}.html", method = RequestMethod.DELETE)
 	public ModelAndView delete(@PathVariable("id") long id) {
-		itemRepository.delete(id);
+		itemRepository.deleteById(id);
 		return new ModelAndView("success");
 	}
 

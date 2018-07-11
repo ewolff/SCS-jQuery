@@ -9,8 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -28,7 +28,7 @@ public class CatalogWebIntegrationTest {
 	@Autowired
 	private ItemRepository itemRepository;
 
-	@Value("${local.server.port}")
+	@LocalServerPort
 	private int serverPort;
 
 	private Item iPodNano;
