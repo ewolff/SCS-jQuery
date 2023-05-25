@@ -1,26 +1,22 @@
 package com.ewolff.microservice.catalog;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
-@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = CatalogApp.class)
 @ActiveProfiles("test")
 public class CatalogWebIntegrationTest {
@@ -35,10 +31,14 @@ public class CatalogWebIntegrationTest {
 
 	private RestTemplate restTemplate;
 
-	@Before
+	@BeforeEach
 	public void setup() {
-		iPodNano = itemRepository.findByName("iPod nano").get(0);
-		restTemplate = new RestTemplate();
+		if (iPodNano == null) {
+			iPodNano = itemRepository.findByName("iPod nano").get(0);
+		}
+		if (restTemplate == null) {
+			restTemplate = new RestTemplate();
+		}
 	}
 
 	@Test
@@ -46,9 +46,9 @@ public class CatalogWebIntegrationTest {
 		String url = catalogURL() + "/" + iPodNano.getId() + ".html";
 		String body = getForMediaType(String.class, MediaType.TEXT_HTML, url);
 
-		assertThat(body, containsString("iPod nano"));
-		assertThat(body, containsString("<div"));
-		assertThat(body, containsString("<!DOCTYPE"));
+		assertTrue(body.contains("iPod nano"));
+		assertTrue(body.contains("<div"));
+		assertTrue(body.contains("<!DOCTYPE"));
 	}
 
 	@Test
@@ -56,8 +56,8 @@ public class CatalogWebIntegrationTest {
 		String url = catalogURL() + "/" + iPodNano.getId() + ".snippet";
 		String body = getForMediaType(String.class, MediaType.TEXT_HTML, url);
 
-		assertThat(body, containsString("iPod nano"));
-		assertThat(body, not(containsString("<!DOCTYPE")));
+		assertTrue(body.contains("iPod nano"));
+		assertTrue(body.contains("<!DOCTYPE"));
 	}
 
 	private String catalogURL() {
@@ -69,8 +69,8 @@ public class CatalogWebIntegrationTest {
 		String url = catalogURL() + "/searchForm.html";
 		String body = getForMediaType(String.class, MediaType.TEXT_HTML, url);
 
-		assertThat(body, containsString("<form"));
-		assertThat(body, containsString("<div>"));
+		assertTrue(body.contains("<form"));
+		assertTrue(body.contains("<div>"));
 	}
 
 	@Test
@@ -78,8 +78,8 @@ public class CatalogWebIntegrationTest {
 		String url = catalogURL() + "/searchByName.html?query=iPod";
 		String body = restTemplate.getForObject(url, String.class);
 
-		assertThat(body, containsString("iPod nano"));
-		assertThat(body, containsString("<div"));
+		assertTrue(body.contains("iPod nano"));
+		assertTrue(body.contains("<div"));
 	}
 
 	@Test
@@ -87,11 +87,11 @@ public class CatalogWebIntegrationTest {
 		String url = catalogURL() + "/item-choice.snippet?selected=2&id=myId&name=myName";
 		String body = getForMediaType(String.class, MediaType.TEXT_HTML, url);
 
-		assertThat(body, containsString("iPod nano"));
-		assertThat(body, containsString("id=\"myId\""));
-		assertThat(body, containsString("name=\"myName\""));
-		assertThat(body, containsString("selected"));
-		assertThat(body, containsString("<option"));
+		assertTrue(body.contains("iPod nano"));
+		assertTrue(body.contains("id=\"myId\""));
+		assertTrue(body.contains("name=\"myName\""));
+		assertTrue(body.contains("selected"));
+		assertTrue(body.contains("<option"));
 	}
 
 	private <T> T getForMediaType(Class<T> value, MediaType mediaType, String url) {
