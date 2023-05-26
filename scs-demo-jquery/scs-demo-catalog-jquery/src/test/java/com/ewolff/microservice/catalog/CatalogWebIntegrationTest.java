@@ -1,5 +1,6 @@
 package com.ewolff.microservice.catalog;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -57,7 +58,7 @@ public class CatalogWebIntegrationTest {
 		String body = getForMediaType(String.class, MediaType.TEXT_HTML, url);
 
 		assertTrue(body.contains("iPod nano"));
-		assertTrue(body.contains("<!DOCTYPE"));
+		assertFalse(body.contains("<!DOCTYPE"));
 	}
 
 	private String catalogURL() {

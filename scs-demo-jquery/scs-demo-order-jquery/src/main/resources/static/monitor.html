@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head th:replace="~{layout :: common_head(~{::title})}">
 <title>Monitoring</title>
 <link rel="stylesheet" href="../../css/bootstrap.min.css" />
 </head>
-<body>
-	<h1 layout:fragment="header">Monitoring Links</h1>
+<body th:replace="~{layout :: common_body(~{::h1},~{::#content})}">
+	<h1 >Monitoring Links</h1>
 	<div layout:fragment="content">
 
 		<table>

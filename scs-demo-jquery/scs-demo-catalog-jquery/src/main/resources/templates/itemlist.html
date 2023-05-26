@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-	layout:decorator="layout">
-<head>
-<title>Item : View all</title>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout :: common_head(~{::title})}">
+	<title>Item : View all</title>
 </head>
-<body>
-	<h1 layout:fragment="header">Item : View all</h1>
-	<div layout:fragment="content" class="container">
+
+<body th:replace="~{layout :: common_body(~{::h1},~{::#content})}">
+	<h1>Item : View all</h1>
+	<div id="content" class="container">
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
@@ -22,14 +22,14 @@
 					<td colspan="4">No items</td>
 				</tr>
 				<tr th:each="item : ${items}">
-					<td><a href="1.html" th:href="${item.id+'.html'}"
-						th:text="${item.id}">1</a></td>
+					<td><a href="1.html" th:href="${item.id+'.html'}" th:text="${item.id}">1</a></td>
 					<td th:text="${item.name}">Name</td>
 					<td th:text="${item.price}">42.0</td>
-					<td><form th:action="${item.id+'.html'}"
-							th:method="delete">
+					<td>
+						<form th:action="${item.id+'.html'}" th:method="delete">
 							<input type="submit" value="delete" class="btn btn-link" />
-						</form></td>
+						</form>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -38,6 +38,7 @@
 				<a href="form.html">Add Item</a>
 			</div>
 		</div>
-	</div>
+		</div>
 </body>
+
 </html>
